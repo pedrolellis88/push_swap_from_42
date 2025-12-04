@@ -23,7 +23,7 @@ O programa recebe uma lista de inteiros, valida a entrada e imprime na saída pa
 ## Representação das pilhas
 
 As pilhas são representadas por uma lista encadeada da `libft`:
-
+```c
 typedef struct s_data
 {
     t_list  *a;
