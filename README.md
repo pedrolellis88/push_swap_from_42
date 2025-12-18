@@ -109,11 +109,11 @@ Antes da ordenação, o programa garante que:
 
 Para simplificar a ordenação:
 
-Todos os valores são copiados para um array.
+* Todos os valores são copiados para um array.
 
-O array é ordenado.
+* O array é ordenado.
 
-O valor de cada nó é substituído pelo seu índice no array ordenado.
+* O valor de cada nó é substituído pelo seu índice no array ordenado.
 
 Isso reduz o problema para ordenar valores de 0 a n - 1, o que é mais adequado para algoritmos eficientes como o radix sort.
 
