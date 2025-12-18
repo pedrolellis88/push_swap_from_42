@@ -1,3 +1,206 @@
+*Este projeto foi criado como parte do currículo da 42 por **pdiniz-l**.*
+
+## push_swap_from_42
+
+### Descrição
+
+O projeto **push_swap** é um trabalho da 42 School que consiste na implementação de um algoritmo de ordenação em C utilizando duas pilhas (**A** e **B**) e um conjunto restrito de **11 operações permitidas**.
+
+O programa recebe uma lista de inteiros como entrada, realiza a validação desses dados e imprime na saída padrão a sequência de operações necessária para ordenar a pilha **A** em ordem crescente.  
+O objetivo não é apenas a correção, mas também a eficiência, minimizando o número de operações utilizadas.
+
+Este projeto foca em **raciocínio algorítmico**, **manipulação de estruturas de dados**, **validação de entrada** e **segurança de memória**.
+
+---
+
+### Instruções
+
+#### Compilação
+
+O projeto é compilado utilizando o `Makefile` fornecido.
+
+A partir do diretório raiz do projeto:
+
+```bash
+make        # compila libft_applier e gera o binário push_swap
+make clean  # remove arquivos objeto
+make fclean # remove arquivos objeto e o binário
+make re     # recompila tudo do zero
+```
+O Makefile primeiro compila a `libft` personalizada localizada em `libft_applier`/ e, em seguida, gera o executável `push_swap`.
+
+### Requisitos
+
+* Compilador C (cc, gcc ou clang)
+
+* make
+
+* Ambiente Unix-like (Linux / macOS)
+
+* libft já incluída em libft_applier (não é necessária instalação separada)
+
+### Uso
+
+Entradas válidas podem ser fornecidas de duas formas:
+```bash
+./push_swap 2 1 3 6 5 8
+./push_swap "2 1 3 6 5 8"
+```
+
+Se a entrada for válida, o programa imprime na saída padrão a sequência de operações, por exemplo:
+```bash
+./push_swap 2 1 3 
+sa
+```
+Em caso de erro (argumento inválido, número duplicado, inteiro fora do intervalo permitido, etc.), o programa imprime:
+```text
+Error
+```
+em `stderr` e encerra com código de saída `1`.
+
+#### Operações Permitidas
+
+O programa pode utilizar apenas as seguintes operações:
+
+* `sa`, `sb`, `ss` — swap : troca os dois primeiros elementos de uma pilha.
+
+* `pa`, `pb` — push : move o elemento do topo de uma pilha para a outra.
+
+* `ra`, `rb`, `rr` — rotate : desloca a pilha para cima (o primeiro elemento passa a ser o último).
+
+* `rra`, `rrb`, `rrr` — reverse rotate : desloca a pilha para baixo (o último elemento passa a ser o primeiro).
+
+#### Escolhas de Algoritmo e Estrutura de Dados
+##### Representação das Pilhas
+
+As pilhas são representadas utilizando uma lista encadeada da `libft`:
+```c
+typedef struct s_data
+{
+    t_list  *a;
+    t_list  *b;
+}   t_data;
+```
+Essa estrutura permite rotações e operações de push de forma eficiente, mantendo o uso de memória controlado.
+
+##### Parsing e Validação
+
+Antes da ordenação, o programa garante que:
+
+* Todos os argumentos são inteiros válidos;
+
+* Os valores estão dentro do intervalo de int (32 bits);
+
+* Não existem números duplicados.
+
+##### Principais funções de parsing e validação:
+
+`parse_args` — separa os argumentos e constrói a pilha A
+
+`is_str_valid` — valida se a string representa um inteiro válido
+
+`safe_atoi` — converte char * para int com checagem de overflow
+
+`is_doubled` — verifica a existência de valores duplicados
+
+`error_and_exit` — libera a memória, imprime Error e encerra o programa
+
+##### Indexação (Compressão de Coordenadas)
+
+Para simplificar a ordenação:
+
+Todos os valores são copiados para um array.
+
+O array é ordenado.
+
+O valor de cada nó é substituído pelo seu índice no array ordenado.
+
+Isso reduz o problema para ordenar valores de 0 a n - 1, o que é mais adequado para algoritmos eficientes como o radix sort.
+
+##### Estratégias de Ordenação
+
+* Casos Pequenos (2–5 elementos)
+
+Funções específicas tratam entradas pequenas utilizando combinações mínimas de operações:
+
+`sort_two`
+`sort_three`
+`sort_four`
+`sort_five`
+
+Esses casos são tratados de forma direta para obter desempenho ótimo.
+
+* Casos Médios (≤ 100 elementos)
+
+Ordenação baseada em chunks:
+
+Os índices são divididos em intervalos (chunks);
+
+Elementos do chunk atual são enviados para a pilha B usando rotações;
+
+Os elementos são reinseridos de B para A, sempre trazendo o maior valor de B para o topo.
+
+Essa abordagem reduz significativamente o número de operações.
+
+* Casos Grandes (> 100 elementos)
+
+Radix sort binário sobre os índices:
+
+Para cada bit:
+
+Percorre a pilha A;
+
+Envia para a pilha B os elementos cujo bit atual é 0;
+
+Em seguida, retorna todos os elementos de B para A.
+
+O processo é repetido até que todos os bits relevantes sejam processados, com complexidade aproximada de O(n log n).
+
+#### Estrutura do Repositório
+```text
+push_swap_from_42/
+├── libft_applier/      # Custom libft (libft.a + headers)
+├── srcs/               # push_swap source code
+│   ├── push_swap.h
+│   ├── main.c
+│   ├── parse_args.c
+│   ├── create_head_with_ints.c
+│   ├── is_str_valid.c
+│   ├── safe_atoi.c
+│   ├── is_doubled.c
+│   ├── is_list_sorted.c
+│   ├── error_and_exit.c
+│   ├── swap_utils.c
+│   ├── push_utils.c
+│   ├── rotate_utils.c
+│   ├── reverse_rotate_utils.c
+│   ├── two_three_five_sort_utils.c
+│   ├── sort_five_especific_utils.c
+│   ├── indexing1.c
+│   ├── indexing2.c
+│   └── chunk_sort.c
+└── Makefile
+```
+### Recursos
+
+42 School — enunciado do push_swap
+
+#### Algoritmos:
+
+* Radix Sort
+
+* Estratégias de ordenação por chunks
+
+* Biblioteca Padrão C
+
+#### Documentação POSIX:
+
+* write(2)
+
+* stdlib(3)
+
+# English Version:
+
 *This project has been created as part of the 42 curriculum by **pdiniz-l**.*
 
 ## push_swap_from_42
@@ -46,11 +249,13 @@ Valid inputs can be provided in two ways:
 ./push_swap 2 1 3 6 5 8
 ./push_swap "2 1 3 6 5 8"
 ```
+
 If the input is valid, the program prints to standard output the sequence of operations, for example:
 ```bash
 ./push_swap 2 1 3 
 sa
 ```
+
 In case of error (invalid argument, duplicate number, integer out of range, etc.), the program prints:
 ```text
 Error
