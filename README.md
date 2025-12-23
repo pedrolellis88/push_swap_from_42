@@ -1,10 +1,10 @@
-*Este projeto foi criado como parte do currículo da 42 por **pdiniz-l**.*
+*Este projeto foi criado por **Pedro Henrique Dinis Lellis**
 
-## push_swap_from_42
+## push_swap
 
 ### Descrição
 
-O projeto **push_swap** é um trabalho da 42 School que consiste na implementação de um algoritmo de ordenação em C utilizando duas pilhas (**A** e **B**) e um conjunto restrito de **11 operações permitidas**.
+O projeto **push_swap** que consiste na implementação de um algoritmo de ordenação em C utilizando duas pilhas (**A** e **B**) e um conjunto restrito de **11 operações permitidas**.
 
 O programa recebe uma lista de inteiros como entrada, realiza a validação desses dados e imprime na saída padrão a sequência de operações necessária para ordenar a pilha **A** em ordem crescente.  
 O objetivo não é apenas a correção, mas também a eficiência, minimizando o número de operações utilizadas.
@@ -161,7 +161,7 @@ O processo é repetido até que todos os bits relevantes sejam processados, com 
 
 #### Estrutura do Repositório
 ```text
-push_swap_from_42/
+push_swap/
 ├── libft_applier/      # libft personalizada (libft.a + headers)
 ├── srcs/               # código-fonte do push_swap
 │   ├── push_swap.h
@@ -186,8 +186,6 @@ push_swap_from_42/
 ```
 ### Recursos
 
-42 School — enunciado do push_swap
-
 #### Algoritmos:
 
 * Radix Sort
@@ -204,13 +202,13 @@ push_swap_from_42/
 
 # English Version:
 
-*This project has been created as part of the 42 curriculum by **pdiniz-l**.*
+*This project has been created by **Pedro Henrique Dinis Lellis**
 
-## push_swap_from_42
+## push_swap
 
 ### Description
 
-The **push_swap** project is a 42 School assignment that consists of implementing a sorting algorithm in C using two stacks (**A** and **B**) and a restricted set of **11 allowed operations**.
+The **push_swap** project consists of implementing a sorting algorithm in C using two stacks (**A** and **B**) and a restricted set of **11 allowed operations**.
 
 The program receives a list of integers as input, validates them, and prints to standard output the sequence of operations required to sort stack **A** in ascending order.  
 The objective is not only correctness, but also efficiency, minimizing the number of operations used.
@@ -367,7 +365,7 @@ This process is repeated until all relevant bits are processed, with time comple
 
 #### Repository Structure
 ```text
-push_swap_from_42/
+push_swap/
 ├── libft_applier/      # Custom libft (libft.a + headers)
 ├── srcs/               # push_swap source code
 │   ├── push_swap.h
@@ -391,8 +389,6 @@ push_swap_from_42/
 └── Makefile
 ```
 ### Resources
-
-42 School — push_swap subject
 
 #### Algorithms:
 
